@@ -24,7 +24,12 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 @app.route('/')
 def index():
-    response = requests.get("https://whatsapp.en.aptoide.com/app")
+    return render_template('index.html')
+
+@app.route('/get-info',methods=['post'])
+def get_info():
+    url = request.form.get('url')
+    response = requests.get(url)
     extracted_data = extract_data(response)
     return render_template('get-info.html',data=extracted_data)
 

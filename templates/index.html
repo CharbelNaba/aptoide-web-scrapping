@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<h1>Get Aptoid Information</h1>
+
+<form action="/get-info" method="post" class="form">
+    <label for="url">Enter URL of the desire aptoid app</label>
+    <input type="url" name="url" value="">
+    <input type="submit" value="Submit">
+</form>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <script>
+          var messages = {{ messages | safe }};
+          for (var i=0; i<messages.length; i++) {
+            alert(messages[i]);
+          }
+        </script>
+      {% endfor %}
+    {% endif %}
+{% endwith %}
+
+{% endblock %}
