@@ -1,0 +1,18 @@
+<!-- html page structure  -->
+
+{% extends "base.html" %}
+
+<!-- Title  -->
+
+{% block title %} The data {% endblock %}
+
+<!--Info : show list  -->
+
+{% block main %}
+{%for key in data %}
+    <p><h3> {{key }} : </h3>  {{ data[key]}}</p>
+{%endfor%}
+
+<!-- Redirection  home page  -->
+
+{% endblock %}
