@@ -9,6 +9,12 @@
     <input type="submit" value="Submit">
 </form>
 
+<form action="/get-info-by-name" method="post" class="form">
+    <label for="name">Enter name the desire aptoid app</label>
+    <input type="text" name="name" value="">
+    <input type="submit" value="Submit">
+  </form>
+
 {% with messages = get_flashed_messages() %}
     {% if messages %}
       {% for message in messages %}
