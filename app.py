@@ -1,5 +1,5 @@
 import requests
-from flask import Flask,redirect,flash,request,render_template
+from flask import Flask, redirect, flash, request, render_template
 from typing import Union
 from utils import extract_data, match, find_link
 import werkzeug

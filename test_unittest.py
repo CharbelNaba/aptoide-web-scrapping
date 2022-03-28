@@ -21,10 +21,10 @@ class TestMatch(unittest.TestCase):
 class TestExtractData(unittest.TestCase):
 
     def test_extract_data(self):
-        self.assertEqual(list(extract_data(requests.get("https://facebook.en.aptoide.com/app"))), ["Name","Version","Downloads","Description","Release Date"], "Should return equal")
+        self.assertEqual(list(extract_data(requests.get("https://facebook.en.aptoide.com/app"))), ["Name","Version","Downloads","Description","Release Date"], "Should return corresponding fields")
         
     def test_extract_data_2(self):
-        self.assertEqual(extract_data(requests.get("https://youtube.com/app")), None,"Should return equal")
+        self.assertEqual(extract_data(requests.get("https://youtube.com/app")), None,"Should return None")
     
 
         
