@@ -1,16 +1,18 @@
 import requests
-from flask import *
+from flask import Flask,redirect,flash,request,render_template
 from bs4 import BeautifulSoup
 import re
 from typing import Union,Optional
+import mypy
 from requests_html import HTMLSession
-from httplib2 import Response
 
+[mypy]
+ignore_missing_imports = True
 
 #The following app could have been done whith less line of code using the googlesearch module (public api)
 def find_link(app_name:Optional[str])->Union[str,None]:
     session = HTMLSession()
-    query = "{name}.en.aptoide.com/app".format(name=app_name.lower())
+    query = "{name}.en.aptoide.com/app".format(name=str(app_name).lower())
     response = session.get("https://www.google.com/search?q=" + query)
 
     links = list(response.html.absolute_links)
@@ -30,7 +32,7 @@ def find_link(app_name:Optional[str])->Union[str,None]:
     return None
 
 # Function to extract data from html repsonse
-def extract_data(response:Response)->dict:
+def extract_data(response:requests.Response)->dict:
     data = {}
     soup = BeautifulSoup(response.text, 'html.parser')
     name = soup.select("h1",{"class": "header-touch__AppName-sc-1om5ik5-5 PLRmn"})
@@ -61,21 +63,21 @@ def index():
     return render_template('index.html')
 
 @app.route('/get-info',methods=['post'])
-def get_info(query_url:str="")-> Union[str,Response]:
+def get_info(query_url:str="")-> Union[str,requests.Response]:
     url = query_url if query_url != "" else request.form.get('url')
     if (match(url) == False):
         flash("Please provide a correct aptoide URL")
         return redirect("/")
-    else:
+    elif (url!=""):
         response = requests.get(url)
         extracted_data = extract_data(response)
         return render_template('get-info.html',data=extracted_data)
-
+    else:
+        return redirect("/")
 
 @app.route('/get-info-by-name',methods=['post'])
-def get_info_by_name()-> Response:
+def get_info_by_name()-> requests.Response:
     search_name = request.form.get('name')
-    print("search name is ",search_name!="")
     search_result = find_link(search_name) if search_name!="" else None
     if (search_result != None):
         return get_info(search_result)

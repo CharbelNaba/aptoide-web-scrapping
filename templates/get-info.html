@@ -1,16 +1,13 @@
-<!-- html page structure  -->
-
 {% extends "base.html" %}
 
-
-
-{% block title %} The data {% endblock %}
-
-
 {% block main %}
+
+<h1>Gathered Data</h1>
+
 {%for key in data %}
     <p><h3> {{key }} : </h3>  {{ data[key]}}</p>
 {%endfor%}
 
+<a href="/" style="text-decoration: none;"><button class="try-again" style="border-radius: 5px;"> Test another app </button></a>
 
 {% endblock %}

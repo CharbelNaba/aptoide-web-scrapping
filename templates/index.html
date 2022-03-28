@@ -1,19 +1,18 @@
 {% extends 'base.html' %}
 
 {% block main %}
-<h1>Get Aptoid Information</h1>
-
+<h1 style="color: white">Get Aptoide Information</h1>
 <form action="/get-info" method="post" class="form">
-    <label for="url">Enter URL of the desire aptoid app</label>
-    <input type="url" name="url" value="">
-    <input type="submit" value="Submit">
+    <label for="url">Enter URL of the desire Aptoide app</label>
+    <input type="url" name="url" value="" required style="border-radius: 25px; height:25px;">
+    <input type="submit" value="Submit" style="margin-right:25%;margin-left:25%;margin-top:10px">
 </form>
 
 <form action="/get-info-by-name" method="post" class="form">
-    <label for="name">Enter name the desire aptoid app</label>
-    <input type="text" name="name" value="">
-    <input type="submit" value="Submit">
-  </form>
+  <label for="name">Enter name the desire Aptoide app</label>
+  <input type="text" name="name" value="" style="border-radius: 25px; height:25px;">
+  <input type="submit" value="Submit" style="margin-right:25%;margin-left:25%;margin-top:10px">
+</form>
 
 {% with messages = get_flashed_messages() %}
     {% if messages %}
